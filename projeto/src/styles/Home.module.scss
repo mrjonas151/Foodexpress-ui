@@ -15,6 +15,11 @@
   justify-content: center;
   flex-direction: column;
   padding: 2rem 1.5rem;
+
+  h1{
+    color: var(--white);
+    padding-bottom: 1rem;
+  }
 }
 
 .form{
@@ -26,10 +31,10 @@
 .form button{
   height: 40px;
   font-size: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .text{
-  margin-top: 1rem;
   color: var(--gray-900);
   cursor: pointer;
 }

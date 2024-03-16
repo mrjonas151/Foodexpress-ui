@@ -1,8 +1,10 @@
 import Head from "next/head";
 import styles from '../styles/home.module.scss';
 import Image from "next/image";
+import Link from "next/link";
 
 import logoImg from '../../public/logo.png';
+
 
 import { Input } from "../components/ui/Input"
 import { Button } from "../components/ui/Button";
@@ -23,7 +25,9 @@ export default function Home() {
           <Button type="submit" loading={true}>Acessar</Button>
         </form>
 
-        <a className = {styles.text}>Não possui uma conta? Cadastre-se</a>
+        <Link href="/signup">
+          <span className = {styles.text}>Não possui uma conta? Cadastre-se</span>
+        </Link>
       </div>
     </div>
     
