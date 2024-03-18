@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState } from 'react';
-import { destroyCookie } from 'nookies';
+import { destroyCookie, setCookie, parseCookies } from 'nookies';
 import Router from 'next/router';
+import { api } from '@/services/apiClient';
 
 type AuthContextData = {
   user: UserProps | undefined;
@@ -40,7 +41,35 @@ export function AuthProvider({ children }: AuthProviderProps){
   const isAuthenticated = !!user;
 
   async function signIn( { email, password }: SignInProps){
-    alert("CLICOU NO LOGIN"+email)
+    try{
+      const response = await api.post('/session', {
+        email,
+        password
+      })
+      //console.log(response.data)
+
+      const { id, name, token } = response.data;
+
+      setCookie(undefined, '@nextauth.token', token, {
+        maxAge: 60 * 60 * 24 * 30, //Expirar em 1 mes o token
+        path: "/" //Quais caminhos terao acesso ao cookie, no caso apenas / significa que todos terão
+      })
+
+      setUser({
+        id,
+        name,
+        email 
+      })
+
+      //Passar para as outras requisicoes o token junto:
+      api.defaults.headers['Authorization'] = `Bearer ${token}`
+
+      //Depois de logar, redirecionar o usuario até a /dashboards dos pedidos
+      Router.push('/dashboard')
+
+    }catch(err){
+      console.log("ERRO AO ACESSAR ", err)
+    }
   }
 
   return(
