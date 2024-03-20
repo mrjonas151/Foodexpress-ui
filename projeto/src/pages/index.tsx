@@ -14,6 +14,9 @@ import { AuthContext } from "@/contexts/AuthContext";
 
 import { toast } from "react-toastify";
 
+import { GetServerSideProps } from "next";
+import { canSSRGuest } from "@/utils/canSSRGuest";
+
 export default function Home() {
   const { signIn } = useContext(AuthContext);
 
@@ -67,3 +70,10 @@ export default function Home() {
     </>
   );
 }
+
+//Antes de chegar na tela de usuario, isso passa pelo server apenas
+export const getServerSideProps = canSSRGuest( async (context) => {
+  return {
+    props: {}
+  }
+})
