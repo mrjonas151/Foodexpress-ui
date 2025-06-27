@@ -1,40 +1,170 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍕 FoodExpress UI
 
-## Getting Started
+Sistema de gerenciamento para restaurantes desenvolvido com Next.js, TypeScript e SCSS. Interface administrativa para controle de pedidos, categorias e produtos.
 
-First, run the development server:
+## 📋 Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Autenticação JWT**: Sistema seguro de login/logout com gerenciamento de tokens
+- **Dashboard de Pedidos**: Visualização e controle de pedidos em tempo real
+- **Gestão de Categorias**: Cadastro e organização de categorias de produtos
+- **Gestão de Produtos**: Cadastro de produtos com upload de imagens
+- **Interface Responsiva**: Design moderno e responsivo com SCSS
+- **Notificações**: Sistema de feedback visual com toasts
+- **SSR/SSG**: Renderização otimizada com Next.js
+
+## 🚀 Tecnologias
+
+- **Frontend**: Next.js 14.1.3, React 18, TypeScript
+- **Estilização**: SCSS/Sass
+- **Autenticação**: JWT com cookies seguros
+- **HTTP Client**: Axios
+- **Ícones**: React Icons
+- **Notificações**: React Toastify
+- **Modais**: React Modal
+- **Cookies**: Nookies
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── components/
+│   ├── Header/              # Cabeçalho da aplicação
+│   ├── ModalOrder/          # Modal de detalhes do pedido
+│   └── ui/
+│       ├── Button/          # Componente de botão reutilizável
+│       └── Input/           # Componente de input reutilizável
+├── contexts/
+│   └── AuthContext.tsx     # Contexto de autenticação
+├── pages/
+│   ├── category/           # Página de cadastro de categorias
+│   ├── dashboard/          # Dashboard principal
+│   ├── product/            # Página de cadastro de produtos
+│   └── signup/             # Página de cadastro de usuários
+├── services/
+│   ├── api.ts              # Configuração da API
+│   ├── apiClient.ts        # Cliente HTTP
+│   └── errors/             # Tratamento de erros
+├── styles/                 # Estilos globais
+└── utils/                  # Utilitários (SSR Auth)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Instalação
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. **Clone o repositório**
+```bash
+git clone https://github.com/mrjonas151/Foodexpress-ui
+cd projeto
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+2. **Instale as dependências**
+```bash
+npm install
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+3. **Configure as variáveis de ambiente**
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:3333
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. **Execute o projeto**
+```bash
+npm run dev
+```
 
-## Learn More
+Acesse [http://localhost:3000](http://localhost:3000) no seu navegador.
 
-To learn more about Next.js, take a look at the following resources:
+## 📋 Scripts Disponíveis
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run dev      # Inicia o servidor de desenvolvimento
+npm run build    # Gera o build de produção
+npm run start    # Inicia o servidor de produção
+npm run lint     # Executa o linter
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🔐 Funcionalidades de Autenticação
 
-## Deploy on Vercel
+- **Login**: Autenticação com email e senha
+- **Cadastro**: Registro de novos usuários
+- **Logout**: Encerramento seguro da sessão
+- **Proteção de Rotas**: SSR para páginas autenticadas e não autenticadas
+- **Renovação de Token**: Interceptação automática de requisições
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📊 Funcionalidades Principais
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Dashboard
+- Listagem de pedidos em tempo real
+- Visualização de detalhes dos pedidos
+- Controle de status dos pedidos
+- Atualização manual da lista
+
+### Gestão de Categorias
+- Cadastro de novas categorias
+- Validação de campos obrigatórios
+- Feedback visual de operações
+
+### Gestão de Produtos
+- Cadastro de produtos com imagem
+- Seleção de categoria
+- Upload de imagens
+- Campos: nome, preço, descrição
+
+## 🌐 API Integration
+
+O frontend se comunica com uma API REST rodando em `http://localhost:3333` com os seguintes endpoints:
+
+- `POST /session` - Autenticação
+- `POST /users` - Cadastro de usuários
+- `GET /orders` - Listagem de pedidos
+- `POST /category` - Cadastro de categorias
+- `POST /product` - Cadastro de produtos
+
+## 🎨 Componentes Reutilizáveis
+
+### Button
+Componente de botão padronizado com loading state e variações de estilo.
+
+### Input
+Componente de input com estilos consistentes e integração com formulários.
+
+### Header
+Cabeçalho com navegação e opções de usuário.
+
+### ModalOrder
+Modal para exibição detalhada de pedidos com produtos e quantidades.
+
+## 🔧 Configurações Avançadas
+
+### SSR (Server-Side Rendering)
+- `canSSRAuth`: Proteção para páginas que requerem autenticação
+- `canSSRGuest`: Proteção para páginas de visitantes (login/cadastro)
+
+### Interceptadores de Requisição
+- Inclusão automática de tokens de autenticação
+- Tratamento de erros 401 (não autorizado)
+- Redirecionamento automático em caso de token expirado
+
+## 📱 Responsividade
+
+O sistema é totalmente responsivo, adaptando-se a diferentes tamanhos de tela:
+- Desktop (1200px+)
+- Tablet (768px - 1199px)
+- Mobile (até 767px)
+
+## 🚨 Tratamento de Erros
+
+- **AuthTokenError**: Erro customizado para problemas de autenticação
+- **Toast Notifications**: Feedback visual para sucesso e erro
+- **Interceptadores HTTP**: Tratamento global de erros de API
+
+## 🤝 Contribuição
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+---
+
+⭐ Se este projeto foi útil para você, considere dar uma estrela no repositório!
